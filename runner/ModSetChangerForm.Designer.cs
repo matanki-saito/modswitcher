@@ -31,6 +31,9 @@ namespace claes
         /// </summary>
         private void InitializeComponent()
         {
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ModSetChangerForm));
             this.ChangeButton = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();

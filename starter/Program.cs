@@ -20,14 +20,13 @@ namespace starter
         // key: これは適当にしている
         const string key = "c57f4c778b9cd22fa992ee866a102754";
 
-        // runnerディレクトリ名
-        const string runnerDirName = @"pcl";
-
         // cacheファイル名
         const string cacheFileName = @"c57f4c778b9cd22fa992ee866a102754.zip";
 
         // runner
         const string runnerName = "runner.exe";
+
+        const string appFolderName = "paradox_custom_launcher";
 
         /// <summary>
         /// アプリケーションのメイン エントリ ポイントです。
@@ -35,9 +34,17 @@ namespace starter
         [STAThread]
         static void Main()
         {
+            // ローミングユーザーのApplication Dataフォルダに作成
+            var AppDataPath = System.Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            var appFolderPath = Path.Combine(AppDataPath, appFolderName);
+            if (!Directory.Exists(appFolderPath))
+            {
+                Directory.CreateDirectory(appFolderPath);
+            }
+
             // ファイルがあればMD5を導出する
             string md5 = null;
-            string runnerPath = Path.Combine(runnerDirName, cacheFileName);
+            string runnerPath = Path.Combine(appFolderPath, cacheFileName);
             if (File.Exists(runnerPath))
             {
                 md5 = CalculateMd5(runnerPath);
@@ -62,9 +69,9 @@ namespace starter
                 wc.DownloadFile(uri, tmp);
 
                 // zipを展開する
-                ExtractToDirectory(tmp, runnerDirName, true);
+                ExtractToDirectory(tmp, appFolderPath, true);
 
-                var zipPath = Path.Combine(runnerDirName, cacheFileName);
+                var zipPath = Path.Combine(appFolderPath, cacheFileName);
                 File.Move(tmp, zipPath);
             }
             catch (Exception e)
@@ -77,7 +84,7 @@ namespace starter
 
             // 起動する
             ProcessStartInfo psi = new ProcessStartInfo();
-            psi.FileName = Path.Combine(runnerDirName,runnerName);
+            psi.FileName = Path.Combine(appFolderPath, runnerName);
             Process.Start(psi);
         }
 

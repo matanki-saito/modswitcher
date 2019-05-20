@@ -20,11 +20,10 @@ namespace claes
     {
         private const String defaulturl = "https://gist.githubusercontent.com/matanki-saito/fe7e412123bd13a497c6664e78c7066c/raw/default.sets.yml";
 
-
         private ModSets modsets;
         private List<string> installedMods;
 
-        private System.Diagnostics.Process process;
+        private Process process;
 
         private MyComputerConfiguration config;
 
@@ -38,21 +37,37 @@ namespace claes
             OptionalInitilaize();
         }
 
-        private bool RunExe(bool launcherSkip)
+        private bool RunExe(bool launcherSkip, bool launcherHidden)
         {
             if (process != null) return false;
 
             // https://dobon.net/vb/dotnet/process/shell.html
-            ProcessStartInfo psi = new ProcessStartInfo();
-            psi.FileName = config.GameExePath;
+            ProcessStartInfo psi = new ProcessStartInfo
+            {
+                FileName = config.GameExePath
+            };
+
             if (launcherSkip)
             {
                 psi.Arguments = "-skiplauncher";
             }
 
-            Process.Start(psi);
+            if (launcherHidden)
+            {
+                psi.WindowStyle = System.Diagnostics.ProcessWindowStyle.Minimized;
+            }
+
+            process = Process.Start(psi);
+            process.EnableRaisingEvents = true;
+            process.Exited += Process_Exited;
 
             return true;
+        }
+
+        // プロセスの終了を捕捉する Exited イベントハンドラ
+        private void Process_Exited(object sender, EventArgs e)
+        {
+            process = null;
         }
 
         private void ShutDown()
@@ -83,10 +98,12 @@ namespace claes
 
         private void SetUpCombox()
         {
+            comboBox1.Items.Add("そのまま"); // 0
             foreach (var item in modsets.sets)
             {
                 comboBox1.Items.Add(item.name);
             }
+            comboBox1.SelectedIndex = 0;
         }
 
         private void EnumInstalledMods()
@@ -140,38 +157,48 @@ namespace claes
 
         private void Button1_Click(object sender, EventArgs e)
         {
-            Restart_Exe(false);
+            Restart_Exe(false,false);
         }
 
-        private void Restart_Exe(bool launcherSkip)
+        private void Restart_Exe(bool launcherSkip, bool launcherHidden)
         {
-            // 全てのチェックがオンなことを確認する
-            for (var i = 0; i < checkedListBox1.Items.Count; i++)
+            // 0は特別。何もしない
+            if (comboBox1.SelectedIndex != 0 )
             {
-                if (!checkedListBox1.GetItemChecked(i))
+                // 全てのチェックがオンなことを確認する
+                if (launcherSkip)
                 {
-                    MessageBox.Show("全てのチェックが付いている必要があります");
-                    return;
+                    for (var i = 0; i < checkedListBox1.Items.Count; i++)
+                    {
+                        if (!checkedListBox1.GetItemChecked(i))
+                        {
+                            MessageBox.Show("全てのチェックが付いている必要があります");
+                            return;
+                        }
+                    }
                 }
+
+                // 必要なModリストを作る
+                var requiredModFilePaths = new List<string>();
+                foreach (var item in modsets.sets[comboBox1.SelectedIndex - 1].required)
+                {
+                    requiredModFilePaths.Add(item.file);
+                }
+                settingsTxt.ActiveMods = requiredModFilePaths;
+
+                // 更新
+                ShutDown();
+                settingsTxt.Update();
             }
 
-            // 必要なModリストを作る
-            var requiredModFilePaths = new List<string>();
-            foreach (var item in modsets.sets[comboBox1.SelectedIndex].required)
-            {
-                requiredModFilePaths.Add(item.file);
-            }
-            settingsTxt.ActiveMods = requiredModFilePaths;
-
-            // 更新
-            ShutDown();
-            settingsTxt.Update();
-            RunExe(launcherSkip);
+            RunExe(launcherSkip, launcherHidden);
         }
 
 
         private void ComboBox1_ItemChecked(object sender, ItemCheckEventArgs e)
         {
+            Console.WriteLine(e);
+
             if (e.CurrentValue == CheckState.Checked)
             {
                 if (e.NewValue == CheckState.Checked)
@@ -188,7 +215,7 @@ namespace claes
                 // チェックが入りました
                 if(e.NewValue == CheckState.Checked)
                 {
-                    var currentSet = modsets.sets[comboBox1.SelectedIndex];
+                    var currentSet = modsets.sets[comboBox1.SelectedIndex-1];
                     var targetMod = currentSet.required[e.Index];
                     if (targetMod.s_id != 0)
                     {
@@ -215,14 +242,22 @@ namespace claes
 
         private void SetModList()
         {
-            var index = comboBox1.SelectedIndex;
-            var requiredMods = modsets.sets[index].required;
-
             // ModSetを切り替えたら表はリセットする
             checkedListBox1.Items.Clear();
 
+            // index 0は特別扱い
+            var index = comboBox1.SelectedIndex-1;
+            if (index < 0)
+            {
+                return;
+            }
+            
+            var requiredMods = modsets.sets[index].required;
+
             // URL開いてしまうので一時無効化する
             checkedListBox1.ItemCheck -= ComboBox1_ItemChecked;
+
+            var restartflag = false;
 
             for (var i = 0; i < requiredMods.Count(); i++)
             {
@@ -230,11 +265,18 @@ namespace claes
 
                 checkedListBox1.Items.Add(item.name);
                 var flag = false;
-                if (this.installedMods.Contains(item.file))
+                if (installedMods.Contains(item.file))
                 {
                     flag = true;
                 }
                 checkedListBox1.SetItemChecked(i, flag);
+
+                restartflag |= !flag;
+            }
+
+            if (restartflag)
+            {
+                Restart_Exe(false,true);
             }
 
             checkedListBox1.ItemCheck += ComboBox1_ItemChecked;
@@ -279,12 +321,7 @@ namespace claes
 
         private void Button1_Click_1(object sender, EventArgs e)
         {
-            Restart_Exe(true);
-        }
-
-        private void ComboBox2_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
+            Restart_Exe(true,true);
         }
     }
 }

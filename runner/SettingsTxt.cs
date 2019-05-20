@@ -31,7 +31,12 @@ namespace claes
                 strechMods.Add($"\t\"mod/{fileName}\"");
             }
 
-            var mainPart = string.Join(rtncode, strechMods);
+            var mainPart = string.Join(rtncode, strechMods); ;
+            if (prePart == null)
+            {
+                mainPart = "last_mods={" + rtncode + mainPart + rtncode + "}";
+            }
+
             using (var fw = new StreamWriter(filePath))
             {
                 fw.Write($"{prePart}{rtncode}{mainPart}{rtncode}{postPart}{rtncode}");
@@ -68,9 +73,12 @@ namespace claes
             }
             postPart += string.Join(rtncode, buf);
 
-            foreach (Match m in Regex.Matches(mainPart, "\"([^\"]+)\""))
+            if (mainPart != null)
             {
-                ActiveMods.Add(Path.GetFileName(m.Groups[1].Value));
+                foreach (Match m in Regex.Matches(mainPart, "\"([^\"]+)\""))
+                {
+                    ActiveMods.Add(Path.GetFileName(m.Groups[1].Value));
+                }
             }
         }
     }
