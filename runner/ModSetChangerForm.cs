@@ -82,10 +82,8 @@ namespace claes
         {
             config = new MyComputerConfiguration("Europa Universalis IV", 236850, "eu4.exe");
 
-            if (config.ModsetDirectory != null) {
-                LoadModSets();
-                SetUpCombox();
-            }
+            LoadModSets();
+            SetUpCombox();
 
             EnumInstalledMods();
 
@@ -120,17 +118,18 @@ namespace claes
 
         private void LoadModSets()
         {
-            var di = new DirectoryInfo(config.ModsetDirectory);
-            var files = di.GetFiles("*.yml", SearchOption.TopDirectoryOnly);
-
-            var deserializer = new DeserializerBuilder().Build();
-
             modsets = LoadDefaultModSets();
-            foreach (var fileInfo in files)
+            if (config.ModsetDirectory != null)
             {
-                using (var text = new StreamReader(fileInfo.FullName))
+                var di = new DirectoryInfo(config.ModsetDirectory);
+                var files = di.GetFiles("*.yml", SearchOption.TopDirectoryOnly);
+                var deserializer = new DeserializerBuilder().Build();
+                foreach (var fileInfo in files)
                 {
-                    modsets.sets.Add(deserializer.Deserialize<ModSet>(text));
+                    using (var text = new StreamReader(fileInfo.FullName))
+                    {
+                        modsets.sets.Add(deserializer.Deserialize<ModSet>(text));
+                    }
                 }
             }
         }
