@@ -72,7 +72,7 @@ namespace starter
                 ExtractToDirectory(tmp, appFolderPath, true);
 
                 var zipPath = Path.Combine(appFolderPath, cacheFileName);
-                File.Move(tmp, zipPath);
+                File.Copy(tmp, zipPath, true);
             }
             catch (Exception e)
             {

@@ -256,8 +256,6 @@ namespace claes
             // URL開いてしまうので一時無効化する
             checkedListBox1.ItemCheck -= ComboBox1_ItemChecked;
 
-            var restartflag = false;
-
             for (var i = 0; i < requiredMods.Count(); i++)
             {
                 var item = requiredMods[i];
@@ -270,12 +268,6 @@ namespace claes
                 }
                 checkedListBox1.SetItemChecked(i, flag);
 
-                restartflag |= !flag;
-            }
-
-            if (restartflag)
-            {
-                Restart_Exe(false,true);
             }
 
             checkedListBox1.ItemCheck += ComboBox1_ItemChecked;
