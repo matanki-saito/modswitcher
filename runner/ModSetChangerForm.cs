@@ -18,7 +18,7 @@ namespace claes
 {
     public partial class ModSetChangerForm : Form
     {
-        private const String defaulturl = "https://gist.githubusercontent.com/matanki-saito/fe7e412123bd13a497c6664e78c7066c/raw/default.sets.yml";
+        private const String defaulturl = "https://raw.githubusercontent.com/matanki-saito/modswitcher/master/set.default.yml";
 
         private ModSets modsets;
         private List<string> installedMods;

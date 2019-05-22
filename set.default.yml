@@ -1,0 +1,11 @@
+sets:
+  - name: "おすすめModセット"
+    s_id: 236850 #EU4
+    required:
+      - name: "Graphical Map Improvements"
+        s_id: 253263609
+        file: graphicmap.mod
+
+      - name: "Unit Packs Extended"
+        s_id: 280502457
+        file: unit_packs_extended.mod
