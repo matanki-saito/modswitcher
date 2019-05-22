@@ -31,14 +31,13 @@ namespace claes
         /// </summary>
         private void InitializeComponent()
         {
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
-
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ModSetChangerForm));
             this.ChangeButton = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // ChangeButton
@@ -78,6 +77,10 @@ namespace claes
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.Button1_Click_1);
             // 
+            // timer1
+            // 
+            this.timer1.Interval = 10000;
+            // 
             // ModSetChangerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -89,6 +92,8 @@ namespace claes
             this.Controls.Add(this.ChangeButton);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "ModSetChangerForm";
             this.Text = "Mod set changer";
             this.ResumeLayout(false);
@@ -101,5 +106,6 @@ namespace claes
         private ComboBox comboBox1;
         private CheckedListBox checkedListBox1;
         private Button button1;
+        private Timer timer1;
     }
 }

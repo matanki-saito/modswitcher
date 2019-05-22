@@ -156,6 +156,15 @@ namespace claes
 
         private void Button1_Click(object sender, EventArgs e)
         {
+            comboBox1.Enabled = button1.Enabled = ChangeButton.Enabled = false;
+            timer1.Start();
+            timer1.Tick += (s, args) =>
+            {
+                // タイマーの停止
+                timer1.Stop();
+                comboBox1.Enabled = button1.Enabled = ChangeButton.Enabled = true;
+            };
+
             Restart_Exe(false,false);
         }
 
@@ -236,7 +245,7 @@ namespace claes
 
         private void ComboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            SetModList();
+                SetModList();
         }
 
         private void SetModList()
