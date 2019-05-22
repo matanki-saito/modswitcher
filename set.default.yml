@@ -9,3 +9,63 @@ sets:
       - name: "Unit Packs Extended"
         s_id: 280502457
         file: unit_packs_extended.mod
+
+  - name: "Extended Timeline 明朝体"
+    s_id: 236850 #EU4
+    required:
+      - name: "Extended Timeline"
+        s_id: 217416366
+        file: extendedtimeline.mod
+
+      - name: "- Extended Timeline Japanese 1 : Main"
+        s_id: 1748534255
+        file: extendedtimeline_japanese_01.mod
+
+      - name: "- Extended Timeline Japanese 2 : Mincho Font"
+        s_id: 1748534603
+        file: extendedtimeline_japanese_02.mod
+
+  - name: "Extended Timeline ゴシック"
+    s_id: 236850 #EU4
+    required:
+      - name: "Extended Timeline"
+        s_id: 217416366
+        file: extendedtimeline.mod
+
+      - name: "- Extended Timeline Japanese 1 : Main"
+        s_id: 1748534255
+        file: extendedtimeline_japanese_01.mod
+
+      - name: "- Extended Timeline Japanese 3 : Gothic Font"
+        s_id: 1748535388
+        file: extendedtimeline_japanese_03.mod
+
+  - name: "Imperium Universalis 明朝体"
+    s_id: 236850 #EU4
+    required:
+      - name: "Imperium Universalis"
+        s_id: 679204773
+        file: imperium_universalis.mod
+
+      - name: "- Imperium Universalis Japanese 1 : Main"
+        s_id: 1748547134
+        file: imperium_universalis_japanese_01.mod
+
+      - name: "- Imperium Universalis Japanese 2 : Mincho Font"
+        s_id: 1748549554
+        file: imperium_universalis_japanese_02.mod
+
+  - name: "Imperium Universalis ゴシック"
+    s_id: 236850 #EU4
+    required:
+      - name: "Imperium Universalis"
+        s_id: 679204773
+        file: imperium_universalis.mod
+
+      - name: "- Imperium Universalis Japanese 1 : Main"
+        s_id: 1748547134
+        file: imperium_universalis_japanese_01.mod
+
+      - name: "- Imperium Universalis Japanese 3 : Gothic Font"
+        s_id: 1748550458
+        file: imperium_universalis_japanese_03.mod
