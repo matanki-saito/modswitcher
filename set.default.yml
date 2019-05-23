@@ -1,5 +1,5 @@
 sets:
-  - name: "標準 明朝体 完全翻訳 （鉄人不可）"
+  - name: "完全翻訳 明朝体 （鉄人不可）"
     s_id: 236850 #EU4
     required:
       - name: "JPMOD Main 1: Fonts and UI"
@@ -14,7 +14,7 @@ sets:
         s_id: 0
         file: jpmod_ap2_mod.mod
 
-  - name: "標準 明朝体 部分翻訳 （鉄人可能）"
+  - name: "部分翻訳 明朝体 （鉄人可）"
     s_id: 236850 #EU4
     required:
       - name: "JPMOD Main 1: Fonts and UI"
@@ -25,7 +25,7 @@ sets:
         s_id: 0
         file: jpmod_ap1_mod.mod
 
-  - name: "標準 ゴシック 完全翻訳 （鉄人不可）"
+  - name: "完全翻訳 ゴシック （鉄人不可）"
     s_id: 236850 #EU4
     required:
       - name: "JPMOD Main 1: Fonts and UI"
@@ -44,7 +44,7 @@ sets:
         s_id: 0
         file: jpmod_font_gothic.mod
 
-  - name: "標準 ゴシック 部分翻訳 （鉄人可能）"
+  - name: "部分翻訳 ゴシック （鉄人可）"
     s_id: 236850 #EU4
     required:
       - name: "JPMOD Main 1: Fonts and UI"
