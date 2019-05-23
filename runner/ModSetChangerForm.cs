@@ -321,7 +321,16 @@ namespace claes
 
         private void Button1_Click_1(object sender, EventArgs e)
         {
-            Restart_Exe(true,true);
+            comboBox1.Enabled = button1.Enabled = ChangeButton.Enabled = false;
+            timer1.Start();
+            timer1.Tick += (s, args) =>
+            {
+                // タイマーの停止
+                timer1.Stop();
+                comboBox1.Enabled = button1.Enabled = ChangeButton.Enabled = true;
+            };
+
+            Restart_Exe(true,false);
         }
     }
 }
