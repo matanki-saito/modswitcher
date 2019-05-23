@@ -1,16 +1,5 @@
 sets:
-  - name: "日本語化 明朝体 部分翻訳 鉄人モード可能"
-    s_id: 236850 #EU4
-    required:
-      - name: "JPMOD Main 1: Fonts and UI"
-        s_id: 0
-        file: jpmod_ap0_mod.mod
-
-      - name: "JPMOD Main 2: Text"
-        s_id: 0
-        file: jpmod_ap1_mod.mod
-
-  - name: "日本語化 明朝体 完全翻訳 鉄人モード不可"
+  - name: "標準 明朝体 完全翻訳 （鉄人不可）"
     s_id: 236850 #EU4
     required:
       - name: "JPMOD Main 1: Fonts and UI"
@@ -25,7 +14,7 @@ sets:
         s_id: 0
         file: jpmod_ap2_mod.mod
 
-  - name: "日本語化 ゴシック 部分翻訳 鉄人モード可能"
+  - name: "標準 明朝体 部分翻訳 （鉄人可能）"
     s_id: 236850 #EU4
     required:
       - name: "JPMOD Main 1: Fonts and UI"
@@ -36,11 +25,7 @@ sets:
         s_id: 0
         file: jpmod_ap1_mod.mod
 
-      - name: "JPMOD Font Gothic"
-        s_id: 0
-        file: jpmod_font_gothic.mod
-
-  - name: "日本語化 ゴシック 完全翻訳 鉄人モード不可"
+  - name: "標準 ゴシック 完全翻訳 （鉄人不可）"
     s_id: 236850 #EU4
     required:
       - name: "JPMOD Main 1: Fonts and UI"
@@ -59,7 +44,22 @@ sets:
         s_id: 0
         file: jpmod_font_gothic.mod
 
-  - name: "古代〜現代 Mod Extended Timeline 明朝体"
+  - name: "標準 ゴシック 部分翻訳 （鉄人可能）"
+    s_id: 236850 #EU4
+    required:
+      - name: "JPMOD Main 1: Fonts and UI"
+        s_id: 0
+        file: jpmod_ap0_mod.mod
+
+      - name: "JPMOD Main 2: Text"
+        s_id: 0
+        file: jpmod_ap1_mod.mod
+
+      - name: "JPMOD Font Gothic"
+        s_id: 0
+        file: jpmod_font_gothic.mod
+
+  - name: "Extended Timeline 明朝体"
     s_id: 236850 #EU4
     required:
       - name: "Extended Timeline"
@@ -74,7 +74,7 @@ sets:
         s_id: 1748534603
         file: extendedtimeline_japanese_02.mod
 
-  - name: "古代〜現代 Mod Extended Timeline ゴシック"
+  - name: "Extended Timeline ゴシック"
     s_id: 236850 #EU4
     required:
       - name: "Extended Timeline"
@@ -89,7 +89,7 @@ sets:
         s_id: 1748535388
         file: extendedtimeline_japanese_03.mod
 
-  - name: "古代 Mod Imperium Universalis 明朝体"
+  - name: "Imperium Universalis 明朝体"
     s_id: 236850 #EU4
     required:
       - name: "Imperium Universalis"
@@ -104,7 +104,7 @@ sets:
         s_id: 1748549554
         file: imperium_universalis_japanese_02.mod
 
-  - name: "古代 Mod Imperium Universalis ゴシック"
+  - name: "Imperium Universalis ゴシック"
     s_id: 236850 #EU4
     required:
       - name: "Imperium Universalis"
