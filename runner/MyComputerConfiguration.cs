@@ -249,7 +249,7 @@ namespace claes
                     {
                         if (m != null)
                         {
-                            gameLibsPaths.Add(m.Groups[1].Value.Trim('\"').Replace("\\\\", "\\"));
+                            gameLibsPaths.Add(Path.Combine(m.Groups[1].Value.Trim('\"').Replace("\\\\", "\\"), "steamapps"));
                         }
                     }
                 }

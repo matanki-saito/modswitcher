@@ -20,6 +20,8 @@ namespace claes
         [STAThread]
         private static void Main()
         {
+            Console.WriteLine("hoge");
+
             Form modSetChanger = new ModSetChangerForm();
 
             Application.Run(modSetChanger);
